@@ -16,7 +16,9 @@ public class PhongCanBoImpl implements PhongCanBoService {
     private PhongCanBoRepository phongCanBoRepository;
     @Override
     public List<Phongcanbo> getAllRooms() {
-        return phongCanBoRepository.findAll();
+        List<Phongcanbo> rooms = phongCanBoRepository.findAll();
+        System.out.println("Found rooms: " + rooms.size());  // Debug log
+        return rooms;
     }
 
     @Override
