@@ -1,37 +1,30 @@
 package com.apache.hotelroom.model;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
-@Table(name = "chi_tiet_phong")
+@Table(name = "hinh_anh_phong")
 @Data
 @Getter
 @Setter
-public class Chitietphong {
+public class HinhAnhPhong {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "phong_id", nullable = false)
+    @JsonBackReference
     private Phongcanbo phongCanBo;
 
-    @Column(name = "giuong")
-    private Integer giuong;
-
-    @Column(name = "tivi")
-    private Integer tivi;
-
-    @Column(name = "tu")
-    private Integer tu;
-
-    @Column(name = "nha_tam")
-    private Integer nhaTam;
-
-    // Getters and Setters
-
+    @Column(name = "url", nullable = false)
+    private String url;
 }

@@ -1,5 +1,7 @@
 package com.apache.hotelroom.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -28,10 +30,12 @@ public class Canbo {
     @Column(name = "ngay_di")
     private Date ngayDi;
 
-    @ManyToOne
-    @JoinColumn(name = "phong_id")
-    private Phongcanbo phongCanBo;
+//    @ManyToOne
+//    @JoinColumn(name = "phong_id")
+//    @JsonBackReference
+//    private Phongcanbo phongCanBo;
 
     @OneToMany(mappedBy = "canBo")
+    @JsonManagedReference
     private List<HinhAnhCanBo> hinhAnhCanBos;
 }

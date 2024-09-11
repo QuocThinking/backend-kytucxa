@@ -1,5 +1,7 @@
 package com.apache.hotelroom.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -24,14 +26,27 @@ public class Phongcanbo {
     @Column(name = "loai_phong")
     private String loaiPhong;
 
-    @OneToMany(mappedBy = "phongCanBo")
-    private List<Canbo> canBos;
+    @ManyToOne
+    @JoinColumn(name = "canbo_id")
+    private Canbo canBo;
 
     @OneToMany(mappedBy = "phongCanBo")
+    @JsonManagedReference
     private List<HinhAnhPhong> hinhAnhPhongs;
 
-    @OneToOne(mappedBy = "phongCanBo")
-    private Chitietphong chiTietPhong;
+    @ManyToOne
+    @JoinColumn(name = "tang_id")
+    @JsonBackReference
+    private Tang tang;
+
+    @ManyToOne
+    @JoinColumn(name = "building_id")
+    @JsonBackReference
+    private Building building;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private RoomStatus status = RoomStatus.VACANT;
 
     // Getters and Setters
 }
