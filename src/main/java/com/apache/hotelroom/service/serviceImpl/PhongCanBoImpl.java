@@ -1,5 +1,6 @@
 package com.apache.hotelroom.service.serviceImpl;
 
+import com.apache.hotelroom.DTO.PhongCanBoDTO;
 import com.apache.hotelroom.model.Phongcanbo;
 import com.apache.hotelroom.service.PhongCanBoService;
 import com.apache.hotelroom.repository.PhongCanBoRepository;
@@ -22,7 +23,8 @@ public class PhongCanBoImpl implements PhongCanBoService {
     }
 
     @Override
-    public Page<Phongcanbo> findByTangId(long tangId, Pageable pageable) {
-        return phongCanBoRepository.findByTangId(tangId, pageable);
+    public Page<PhongCanBoDTO> findByTangId(long tangId, Pageable pageable) {
+        Page<Phongcanbo> phongcanboPage = phongCanBoRepository.findByTangId(tangId, pageable);
+        return phongcanboPage.map(PhongCanBoDTO::toDTO);
     }
 }

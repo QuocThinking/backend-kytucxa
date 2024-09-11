@@ -1,5 +1,6 @@
 package com.apache.hotelroom.service;
 
+import com.apache.hotelroom.DTO.PhongCanBoDTO;
 import com.apache.hotelroom.model.Phongcanbo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,5 +12,5 @@ import java.util.List;
 public interface PhongCanBoService
 {
     List<Phongcanbo> getAllRooms();
-    Page<Phongcanbo> findByTangId(long tangId, Pageable pageable);
+    Page<PhongCanBoDTO> findByTangId(long tangId, Pageable pageable);
 }

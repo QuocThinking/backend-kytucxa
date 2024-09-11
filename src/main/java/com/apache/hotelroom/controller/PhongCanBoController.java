@@ -1,5 +1,6 @@
 package com.apache.hotelroom.controller;
 
+import com.apache.hotelroom.DTO.PhongCanBoDTO;
 import com.apache.hotelroom.model.Phongcanbo;
 import com.apache.hotelroom.service.PhongCanBoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,13 @@ public class PhongCanBoController {
     }
 
     @GetMapping("/tang/{tangId}")
-    public ResponseEntity<Page<Phongcanbo>> getPhongByTangId(
+    public ResponseEntity<Page<PhongCanBoDTO>> getPhongByTangId(
             @PathVariable long tangId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ){
         Pageable pageable = PageRequest.of(page, size);
-        Page<Phongcanbo> result = phongCanBoService.findByTangId(tangId, pageable);
+        Page<PhongCanBoDTO> result = phongCanBoService.findByTangId(tangId, pageable);
         return ResponseEntity.ok(result);
     }
 }
