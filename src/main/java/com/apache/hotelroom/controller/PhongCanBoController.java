@@ -3,9 +3,11 @@ package com.apache.hotelroom.controller;
 import com.apache.hotelroom.model.Phongcanbo;
 import com.apache.hotelroom.service.PhongCanBoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +21,16 @@ public class PhongCanBoController {
     @GetMapping("/danhsach")
     public List<Phongcanbo> getAllRooms() {
         return phongCanBoService.getAllRooms();
+    }
+
+    @GetMapping("/tang/{tangId}")
+    public ResponseEntity<Page<Phongcanbo>> getPhongByTangId(
+            @PathVariable long tangId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Phongcanbo> result = phongCanBoService.findByTangId(tangId, pageable);
+        return ResponseEntity.ok(result);
     }
 }
