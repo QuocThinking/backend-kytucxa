@@ -26,6 +26,8 @@ public class Phongcanbo {
     @Column(name = "loai_phong")
     private String loaiPhong;
 
+    private String section;
+
     @ManyToOne
     @JoinColumn(name = "canbo_id")
     private Canbo canBo;

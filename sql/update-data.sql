@@ -125,3 +125,6 @@ ALTER TABLE phong_can_bo
 ADD COLUMN status ENUM('VACANT', 'OCCUPIED') DEFAULT 'VACANT';
 
 DESCRIBE can_bo;
+
+ALTER TABLE phong_can_bo
+ADD section VARCHAR(50);
