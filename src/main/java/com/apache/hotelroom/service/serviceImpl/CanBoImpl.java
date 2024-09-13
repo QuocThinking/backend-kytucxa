@@ -19,13 +19,40 @@ public class CanBoImpl implements CanBoService {
     @Autowired
     private PhongCanBoRepository phongCanBoRepository;
 
-    @Override
-    public CanBoDTO addCanBoToPhong(String tenPhong, Integer tangId, Integer buildingId, CanBoDTO canBoDTO) {
-       if(canBoRepository.findByTenCanBo(canBoDTO.getTenCanBo()).isPresent()){
-           throw  new CanBoAlreadyExistsException("Tên người dùng đã tồn tại");
-       }
+//    @Override
+//    public CanBoDTO addCanBoToPhong(String tenPhong, Integer tangId, Integer buildingId, CanBoDTO canBoDTO) {
+//       if(canBoRepository.findByTenCanBo(canBoDTO.getTenCanBo()).isPresent()){
+//           throw  new CanBoAlreadyExistsException("Tên người dùng đã tồn tại");
+//       }
+//
+//        Phongcanbo phongcanbo = phongCanBoRepository.findByTenPhongAndTang_IdAndBuilding_Id(tenPhong, tangId, buildingId)
+//                .orElseThrow(() -> new RuntimeException("Phòng không tồn tại"));
+//
+//        Canbo canbo = new Canbo();
+//        canbo.setTenCanBo(canBoDTO.getTenCanBo());
+//        canbo.setNgayDen(canBoDTO.getNgayDen());
+//        canbo.setNgayDi(canBoDTO.getNgayDi());
+//
+//        Canbo savedCanBo = canBoRepository.save(canbo);
+//
+//        phongcanbo.setCanBo(savedCanBo);
+//        phongCanBoRepository.save(phongcanbo);
+//
+//        CanBoDTO responseDTO = new CanBoDTO();
+//        responseDTO.setTenCanBo(savedCanBo.getTenCanBo());
+//        responseDTO.setNgayDen(savedCanBo.getNgayDen());
+//        responseDTO.setNgayDi(savedCanBo.getNgayDi());
+//
+//        return  responseDTO;
+//    }
 
-        Phongcanbo phongcanbo = phongCanBoRepository.findByTenPhongAndTang_IdAndBuilding_Id(tenPhong, tangId, buildingId)
+    @Override
+    public CanBoDTO addCanBoToPhong(Integer id, CanBoDTO canBoDTO) {
+        if(canBoRepository.findByTenCanBo(canBoDTO.getTenCanBo()).isPresent()){
+            throw  new CanBoAlreadyExistsException("Tên người dùng đã tồn tại");
+        }
+
+        Phongcanbo phongcanbo = phongCanBoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Phòng không tồn tại"));
 
         Canbo canbo = new Canbo();

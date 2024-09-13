@@ -15,15 +15,13 @@ public class CanBoController {
     @Autowired
     private CanBoService canBoService;
 
-    @PostMapping("/add-room/{tenPhong}/{tangId}/{buildingId}")
+    @PostMapping("/add-room/{phongId}")
     public ResponseEntity<?> addCanBoToPhong(
-            @PathVariable String tenPhong,
-            @PathVariable Integer tangId,
-            @PathVariable Integer buildingId,
+           @PathVariable Integer phongId,
             @RequestBody CanBoDTO canBoDTO
                     ) {
        try {
-           CanBoDTO addedCanBo = canBoService.addCanBoToPhong(tenPhong, tangId, buildingId, canBoDTO);
+           CanBoDTO addedCanBo = canBoService.addCanBoToPhong(phongId, canBoDTO);
            return ResponseEntity.ok().body(
                    Map.of(
                            "message","Đã thêm cán bộ thành công",
