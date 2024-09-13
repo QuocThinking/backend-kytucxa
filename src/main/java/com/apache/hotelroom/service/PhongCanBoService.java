@@ -1,6 +1,8 @@
 package com.apache.hotelroom.service;
 
 import com.apache.hotelroom.DTO.PhongCanBoDTO;
+import com.apache.hotelroom.exception.CanBoAlreadyExistsException;
+import com.apache.hotelroom.model.Canbo;
 import com.apache.hotelroom.model.Phongcanbo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,4 +15,6 @@ public interface PhongCanBoService
 {
     List<Phongcanbo> getAllRooms();
     Page<PhongCanBoDTO> findByTangId(long tangId, Pageable pageable);
+
+    Canbo addCanBoToPhong(int phongId, Canbo canbo) throws CanBoAlreadyExistsException;
 }
