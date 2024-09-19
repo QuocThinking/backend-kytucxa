@@ -28,7 +28,7 @@ public class PhongCanBoController {
     public ResponseEntity<Page<PhongCanBoDTO>> getPhongByTangId(
             @PathVariable long tangId,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
+            @RequestParam(defaultValue = "100") int size
     ){
         Pageable pageable = PageRequest.of(page, size);
         Page<PhongCanBoDTO> result = phongCanBoService.findByTangId(tangId, pageable);
