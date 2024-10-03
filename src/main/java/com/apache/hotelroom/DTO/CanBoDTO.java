@@ -19,5 +19,4 @@ public class CanBoDTO {
     private Date ngayDi;
     private List<String> hinhAnhCanBo;
 
-
 }
