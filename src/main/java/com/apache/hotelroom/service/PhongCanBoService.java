@@ -9,12 +9,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public interface PhongCanBoService
-{
+public interface PhongCanBoService {
     List<Phongcanbo> getAllRooms();
+
     Page<PhongCanBoDTO> findByTangId(long tangId, Pageable pageable);
+
+    Optional<PhongCanBoDTO> findByRoomId(Integer id);
 
     Canbo addCanBoToPhong(int phongId, Canbo canbo) throws CanBoAlreadyExistsException;
 }

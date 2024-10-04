@@ -52,11 +52,12 @@ CREATE TABLE hinh_anh_phong (
 );
 
 -- User table for security
+
 CREATE TABLE `user` (
     id INT PRIMARY KEY AUTO_INCREMENT,
     ten_nhan_vien VARCHAR(255) NOT NULL,
-    user_name VARCHAR(50) NOT NULL,
-    `password` VARCHAR(50) NOT NULL,
+    user_name VARCHAR(50) NOT NULL UNIQUE, 
+    `password` VARCHAR(255) NOT NULL,    
     rules ENUM('ADMIN','MANAGER') DEFAULT 'MANAGER'
 );
 
