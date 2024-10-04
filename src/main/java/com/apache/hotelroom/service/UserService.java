@@ -1,5 +1,6 @@
 package com.apache.hotelroom.service;
 
+import com.apache.hotelroom.DTO.UserDTO;
 import com.apache.hotelroom.model.User;
 
 import java.util.List;

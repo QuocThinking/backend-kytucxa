@@ -1,6 +1,9 @@
 package com.apache.hotelroom.controller;
 
 import java.util.*;
+
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.apache.hotelroom.DTO.UserDTO;
 import com.apache.hotelroom.model.User;
 import com.apache.hotelroom.service.UserService;
 
@@ -22,21 +27,36 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     @GetMapping("/list")
-    public List<User> getAllUser() {
-        return userService.getAllUser();
+    public List<UserDTO> getAllUser() {
+
+        List<User> users = userService.getAllUser();
+        return modelMapper.map(users, new TypeToken<List<UserDTO>>() {
+        }.getType());
+
     }
 
     @GetMapping("/list/{userId}")
-    public Optional<User> getUserById(@PathVariable Long userId) {
-        return userService.getUserById(userId);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long userId) {
+        Optional<User> user = userService.getUserById(userId);
+
+        if (user.isPresent()) {
+            UserDTO userDTO = modelMapper.map(user.get(), UserDTO.class);
+            return ResponseEntity.ok(userDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/add")
     public ResponseEntity<?> addUser(@RequestBody User user) {
         try {
             User savedUser = userService.createUser(user);
-            return ResponseEntity.ok(savedUser);
+            UserDTO userDTO = modelMapper.map(savedUser, UserDTO.class);
+            return ResponseEntity.ok(userDTO);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -51,7 +71,8 @@ public class UserController {
 
         try {
             User updatedUser = userService.updateUserName(id, tenNhanVien);
-            return ResponseEntity.ok(updatedUser);
+            UserDTO userDTO = modelMapper.map(updatedUser, UserDTO.class);
+            return ResponseEntity.ok(userDTO);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -67,7 +88,8 @@ public class UserController {
 
         try {
             User updatedUser = userService.updatePassword(id, newPassword);
-            return ResponseEntity.ok(updatedUser);
+            UserDTO userDTO = modelMapper.map(updatedUser, UserDTO.class);
+            return ResponseEntity.ok(userDTO);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
