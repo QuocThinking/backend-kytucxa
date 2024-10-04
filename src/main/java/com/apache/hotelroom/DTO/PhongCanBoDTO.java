@@ -1,5 +1,8 @@
 package com.apache.hotelroom.DTO;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.apache.hotelroom.model.Phongcanbo;
 import lombok.Data;
 import lombok.Getter;
@@ -17,11 +20,13 @@ public class PhongCanBoDTO {
     private String section;
     private String status;
 
-    private String tenCanBo;  // Trích xuất từ Canbo nếu cần
-    private String tenTang;   // Trích xuất từ Tang
+    private String tenCanBo; // Trích xuất từ Canbo nếu cần
+    private String tenTang; // Trích xuất từ Tang
     private String tenBuilding;
+    // Thêm danh sách URL của hình ảnh phòng
+    private List<String> hinhAnhUrls;
 
-    public static PhongCanBoDTO toDTO(Phongcanbo phongcanbo){
+    public static PhongCanBoDTO toDTO(Phongcanbo phongcanbo) {
         PhongCanBoDTO dto = new PhongCanBoDTO();
         dto.setId(phongcanbo.getId());
         dto.setTenPhong(phongcanbo.getTenPhong());
@@ -36,7 +41,14 @@ public class PhongCanBoDTO {
         }
         if (phongcanbo.getBuilding() != null) {
             dto.setTenBuilding(phongcanbo.getBuilding().getName());
+        } // Lấy danh sách URL từ hinhAnhPhongs
+        if (phongcanbo.getHinhAnhPhongs() != null) {
+            List<String> hinhAnhUrls = phongcanbo.getHinhAnhPhongs().stream()
+                    .map(hinhAnhPhong -> hinhAnhPhong.getUrl()) // Giả sử HinhAnhPhong có thuộc tính `url`
+                    .collect(Collectors.toList());
+            dto.setHinhAnhUrls(hinhAnhUrls);
         }
+
         return dto;
     }
 

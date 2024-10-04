@@ -12,17 +12,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PhongCanBoImpl implements PhongCanBoService {
     @Autowired
     private PhongCanBoRepository phongCanBoRepository;
 
-
     @Override
     public List<Phongcanbo> getAllRooms() {
         List<Phongcanbo> rooms = phongCanBoRepository.findAll();
-        System.out.println("Found rooms: " + rooms.size());  // Debug log
+        System.out.println("Found rooms: " + rooms.size()); // Debug log
         return rooms;
     }
 
@@ -35,5 +35,13 @@ public class PhongCanBoImpl implements PhongCanBoService {
     @Override
     public Canbo addCanBoToPhong(int phongId, Canbo canbo) throws CanBoAlreadyExistsException {
         return null;
+    }
+
+    @Override
+    public Optional<PhongCanBoDTO> findByRoomId(Integer id) {
+
+        Optional<Phongcanbo> phongcanbo = phongCanBoRepository.findById(id);
+        return phongcanbo.map(PhongCanBoDTO::toDTO);
+
     }
 }
