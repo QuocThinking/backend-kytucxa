@@ -4,6 +4,7 @@ import com.apache.hotelroom.DTO.CanBoDTO;
 import com.apache.hotelroom.exception.CanBoAlreadyExistsException;
 import com.apache.hotelroom.model.Canbo;
 import com.apache.hotelroom.model.Phongcanbo;
+import com.apache.hotelroom.model.RoomStatus;
 import com.apache.hotelroom.repository.CanBoRepository;
 import com.apache.hotelroom.repository.PhongCanBoRepository;
 import com.apache.hotelroom.service.CanBoService;
@@ -69,6 +70,7 @@ public class CanBoImpl implements CanBoService {
         Canbo savedCanBo = canBoRepository.save(canbo);
 
         phongcanbo.setCanBo(savedCanBo);
+        phongcanbo.setStatus(RoomStatus.OCCUPIED);
         phongCanBoRepository.save(phongcanbo);
 
         CanBoDTO responseDTO = new CanBoDTO();

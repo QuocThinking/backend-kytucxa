@@ -20,6 +20,7 @@ public class PhongCanBoDTO {
     private String section;
     private String status;
 
+    private Integer canBoId;
     private String tenCanBo; // Trích xuất từ Canbo nếu cần
     private String tenTang; // Trích xuất từ Tang
     private String tenBuilding;
@@ -33,6 +34,9 @@ public class PhongCanBoDTO {
         dto.setLoaiPhong(phongcanbo.getLoaiPhong());
         dto.setSection(phongcanbo.getSection());
         dto.setStatus(phongcanbo.getStatus().toString());
+        if (phongcanbo.getCanBo() != null) {
+            dto.setCanBoId(phongcanbo.getCanBo().getId());
+        }
         if (phongcanbo.getCanBo() != null) {
             dto.setTenCanBo(phongcanbo.getCanBo().getTenCanBo());
         }
