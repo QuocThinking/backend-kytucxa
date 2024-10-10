@@ -29,7 +29,7 @@ public class Phongcanbo {
     private String section;
 
     @ManyToOne
-    @JoinColumn(name = "canbo_id")
+    @JoinColumn(name = "canbo_id", nullable = true) // Khóa ngoại có thể null
     private Canbo canBo;
 
     @OneToMany(mappedBy = "phongCanBo")

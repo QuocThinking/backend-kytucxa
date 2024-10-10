@@ -17,4 +17,5 @@ public interface PhongCanBoRepository extends JpaRepository<Phongcanbo, Integer>
     Optional<Phongcanbo> findByTenPhongAndTang_IdAndBuilding_Id(String tenPhong, Integer tangId, Integer buildingId);
 
     Optional<Phongcanbo> findById(Integer id);
+    Phongcanbo findByCanBoId(Integer canboId);
 }

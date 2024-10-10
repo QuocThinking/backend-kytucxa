@@ -11,4 +11,12 @@ public interface CanBoService {
     CanBoDTO addCanBoToPhong(Integer phongId, CanBoDTO canBoDTO);
 
     Optional<Canbo> getCanBoById(Integer id);
+
+    public Canbo findById(Integer id);
+    public void deleteCanBoById(Integer id);
+
+//    public void removeCanBoFromPhong(Integer canboId);
+
+    void deleteCanBo(Integer canboId);
+
 }

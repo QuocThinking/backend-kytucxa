@@ -4,8 +4,10 @@ import com.apache.hotelroom.DTO.PhongCanBoDTO;
 import com.apache.hotelroom.exception.CanBoAlreadyExistsException;
 import com.apache.hotelroom.model.Canbo;
 import com.apache.hotelroom.model.Phongcanbo;
+import com.apache.hotelroom.model.RoomStatus;
 import com.apache.hotelroom.service.PhongCanBoService;
 import com.apache.hotelroom.repository.PhongCanBoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +37,26 @@ public class PhongCanBoImpl implements PhongCanBoService {
     @Override
     public Canbo addCanBoToPhong(int phongId, Canbo canbo) throws CanBoAlreadyExistsException {
         return null;
+    }
+
+    @Override
+    public void save(Phongcanbo phongCanBo) {
+        phongCanBoRepository.save(phongCanBo);
+    }
+
+    @Override
+    @Transactional
+    public void removeCanBoIdFromPhong(Integer phongId, Integer canboId) {
+        Phongcanbo phongCanBo = phongCanBoRepository.findById(phongId)
+                .orElseThrow(() -> new RuntimeException("Phòng không tồn tại"));
+
+        if (phongCanBo.getCanBo() != null && phongCanBo.getCanBo().getId().equals(canboId)) {
+            phongCanBo.setCanBo(null); // Xóa ID cán bộ
+            phongCanBo.setStatus(RoomStatus.VACANT); // Cập nhật trạng thái phòng
+            phongCanBoRepository.save(phongCanBo); // Lưu lại thay đổi
+        } else {
+            throw new RuntimeException("Cán bộ này không ở trong phòng này.");
+        }
     }
 
     @Override

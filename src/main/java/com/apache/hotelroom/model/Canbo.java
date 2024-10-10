@@ -15,7 +15,6 @@ import java.util.List;
 @Data
 @Getter
 @Setter
-
 public class Canbo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +29,8 @@ public class Canbo {
     @Column(name = "ngay_di")
     private Date ngayDi;
 
-//    @ManyToOne
-//    @JoinColumn(name = "phong_id")
-//    @JsonBackReference
-//    private Phongcanbo phongCanBo;
+    @OneToOne(mappedBy = "canBo", cascade = CascadeType.ALL, orphanRemoval = false)
+    private Phongcanbo phongCanBo;  // Không để cascade = ALL
 
     @OneToMany(mappedBy = "canBo")
     @JsonManagedReference

@@ -20,4 +20,8 @@ public interface PhongCanBoService {
     Optional<PhongCanBoDTO> findByRoomId(Integer id);
 
     Canbo addCanBoToPhong(int phongId, Canbo canbo) throws CanBoAlreadyExistsException;
+
+    public void save(Phongcanbo phongCanBo);
+
+    void removeCanBoIdFromPhong(Integer phongId, Integer canboId);
 }
