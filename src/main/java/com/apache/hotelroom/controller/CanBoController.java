@@ -38,7 +38,7 @@ public class CanBoController {
     }
 
     @GetMapping("/danhsach/{canboId}")
-    public ResponseEntity<Optional<Canbo>> getUserById(@PathVariable Integer canboId) {
+    public ResponseEntity<Optional<Canbo>> getCanBoById(@PathVariable Integer canboId) {
         Optional<Canbo> canBo = canBoService.getCanBoById(canboId);
 
         if (canBo.isPresent()) {
@@ -49,20 +49,21 @@ public class CanBoController {
         }
     }
 
-    //        @DeleteMapping("/remove-room/{canboId}")
-//        public ResponseEntity<?> removeCanBoFromPhong(@PathVariable Integer canboId) {
-//                try {
-//                        // Gọi phương thức trong service để xóa cán bộ và cập nhật trạng thái phòng
-//                        canBoService.removeCanBoFromPhong(canboId);
-//                        return ResponseEntity.ok().body(
-//                                Map.of("message", "Đã xóa cán bộ và cập nhật trạng thái phòng thành công")
-//                        );
-//                } catch (RuntimeException ex) {
-//                        return ResponseEntity.badRequest().body(
-//                                Map.of("error", "Lỗi trong quá trình xóa cán bộ: " + ex.getMessage())
-//                        );
-//                }
-//        }
+    // @DeleteMapping("/remove-room/{canboId}")
+    // public ResponseEntity<?> removeCanBoFromPhong(@PathVariable Integer canboId)
+    // {
+    // try {
+    // // Gọi phương thức trong service để xóa cán bộ và cập nhật trạng thái phòng
+    // canBoService.removeCanBoFromPhong(canboId);
+    // return ResponseEntity.ok().body(
+    // Map.of("message", "Đã xóa cán bộ và cập nhật trạng thái phòng thành công")
+    // );
+    // } catch (RuntimeException ex) {
+    // return ResponseEntity.badRequest().body(
+    // Map.of("error", "Lỗi trong quá trình xóa cán bộ: " + ex.getMessage())
+    // );
+    // }
+    // }
     @DeleteMapping("/delete/{canboId}")
     public ResponseEntity<?> deleteCanBo(@PathVariable Integer canboId) {
         try {

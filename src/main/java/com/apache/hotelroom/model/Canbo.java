@@ -1,6 +1,7 @@
 package com.apache.hotelroom.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -30,9 +31,11 @@ public class Canbo {
     private Date ngayDi;
 
     @OneToOne(mappedBy = "canBo", cascade = CascadeType.ALL, orphanRemoval = false)
-    private Phongcanbo phongCanBo;  // Không để cascade = ALL
+
+    private Phongcanbo phongCanBo; // Không để cascade = ALL
 
     @OneToMany(mappedBy = "canBo")
     @JsonManagedReference
+
     private List<HinhAnhCanBo> hinhAnhCanBos;
 }

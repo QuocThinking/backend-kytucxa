@@ -1,6 +1,7 @@
 package com.apache.hotelroom.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class Phongcanbo {
 
     @ManyToOne
     @JoinColumn(name = "canbo_id", nullable = true) // Khóa ngoại có thể null
+    @JsonIgnore // them de k lap du lieu
     private Canbo canBo;
 
     @OneToMany(mappedBy = "phongCanBo")
@@ -52,4 +54,3 @@ public class Phongcanbo {
 
     // Getters and Setters
 }
-

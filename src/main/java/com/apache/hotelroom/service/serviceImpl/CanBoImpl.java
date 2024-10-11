@@ -58,9 +58,9 @@ public class CanBoImpl implements CanBoService {
 
     @Override
     public CanBoDTO addCanBoToPhong(Integer id, CanBoDTO canBoDTO) {
-        if (canBoRepository.findByTenCanBo(canBoDTO.getTenCanBo()).isPresent()) {
-            throw new CanBoAlreadyExistsException("Tên người dùng đã tồn tại");
-        }
+        // if (canBoRepository.findByTenCanBo(canBoDTO.getTenCanBo()).isPresent()) {
+        // throw new CanBoAlreadyExistsException("Tên người dùng đã tồn tại");
+        // }
 
         Phongcanbo phongcanbo = phongCanBoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Phòng không tồn tại"));
@@ -103,29 +103,30 @@ public class CanBoImpl implements CanBoService {
         canBoRepository.deleteById(id);
     }
 
-//    @Transactional
-//    @Override
-//    public void removeCanBoFromPhong(Integer canboId) {
-//        // Lấy Canbo từ database (nếu tồn tại)
-//        Canbo canbo = canBoRepository.findById(canboId)
-//                .orElseThrow(() -> new RuntimeException("Không tìm thấy cán bộ"));
-//
-//        // Lấy PhongCanBo từ Canbo (nếu có)
-//        Phongcanbo phongCanBo = canbo.getPhongCanBo();
-//
-//        // Xóa tất cả hình ảnh liên quan đến cán bộ
-//        hinhAnhCanBoRepository.deleteAllByCanBoId(canboId);
-//
-//        // Cập nhật trạng thái của PhongCanBo thành VACANT (nếu PhongCanBo không null)
-//        if (phongCanBo != null) {
-//            phongCanBo.setStatus(RoomStatus.VACANT);
-//            phongCanBo.setCanBo(null); // Xóa liên kết cán bộ khỏi phòng
-//            phongCanBoRepository.save(phongCanBo); // Lưu lại trạng thái đã cập nhật
-//        }
-//
-//        // Xóa Canbo khỏi database
-//        canBoRepository.delete(canbo); // Sử dụng delete đối tượng Canbo
-//    }
+    // @Transactional
+    // @Override
+    // public void removeCanBoFromPhong(Integer canboId) {
+    // // Lấy Canbo từ database (nếu tồn tại)
+    // Canbo canbo = canBoRepository.findById(canboId)
+    // .orElseThrow(() -> new RuntimeException("Không tìm thấy cán bộ"));
+    //
+    // // Lấy PhongCanBo từ Canbo (nếu có)
+    // Phongcanbo phongCanBo = canbo.getPhongCanBo();
+    //
+    // // Xóa tất cả hình ảnh liên quan đến cán bộ
+    // hinhAnhCanBoRepository.deleteAllByCanBoId(canboId);
+    //
+    // // Cập nhật trạng thái của PhongCanBo thành VACANT (nếu PhongCanBo không
+    // null)
+    // if (phongCanBo != null) {
+    // phongCanBo.setStatus(RoomStatus.VACANT);
+    // phongCanBo.setCanBo(null); // Xóa liên kết cán bộ khỏi phòng
+    // phongCanBoRepository.save(phongCanBo); // Lưu lại trạng thái đã cập nhật
+    // }
+    //
+    // // Xóa Canbo khỏi database
+    // canBoRepository.delete(canbo); // Sử dụng delete đối tượng Canbo
+    // }
 
     @Override
     @Transactional
