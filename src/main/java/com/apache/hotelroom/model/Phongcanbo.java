@@ -13,8 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "phong_can_bo")
 @Data
-@Getter
-@Setter
+
 public class Phongcanbo {
 
     @Id
@@ -53,4 +52,5 @@ public class Phongcanbo {
     private RoomStatus status = RoomStatus.VACANT;
 
     // Getters and Setters
+
 }
