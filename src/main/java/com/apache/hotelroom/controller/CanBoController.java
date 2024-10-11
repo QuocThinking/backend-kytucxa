@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/canbo")
-@CrossOrigin("*")
+@CrossOrigin("*") // tat
 public class CanBoController {
 
     @Autowired
